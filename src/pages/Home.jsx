@@ -1,13 +1,11 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
 import NewsCard from "../components/NewsCard";
-import Navbar from "../components/Navbar/Navbar";
+import Banner from "../components/Banner";
+import BannerImg from "../assets/Images/Banner.jpeg";
 import pdfFile from "../assets/pdf/pdf.pdf";
 import thumbnailImage from "../assets/Images/image.png";
-import Banner from "../components/Banner";
 
-function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
-
+function Home({ searchQuery }) {
   const cards = [
     {
       imageSrc: thumbnailImage,
@@ -65,16 +63,16 @@ function Home() {
     },
   ];
 
-
   const filteredCards = cards.filter((card) =>
     card.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div className=" bg-gray-50 min-h-screen">
-      <Navbar onSearch={setSearchQuery} />
-      <Banner/>
-      <h1 className="text-3xl font-bold text-blue-900 mb-6 mt-10 pl-8">Home</h1>
+      <Banner imageUrl={BannerImg} altText="Banner" />
+      <h1 className="text-3xl font-bold text-blue-900 mb-6 mt-10 pl-8">
+        Home
+      </h1>
 
       <div className="flex flex-wrap justify-center gap-6">
         {filteredCards.length > 0 ? (
@@ -96,5 +94,9 @@ function Home() {
     </div>
   );
 }
+
+Home.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+};
 
 export default Home;

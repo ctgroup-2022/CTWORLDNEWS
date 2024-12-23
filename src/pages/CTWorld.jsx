@@ -1,14 +1,11 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
 import NewsCard from "../components/NewsCard";
-import Navbar from "../components/Navbar/Navbar";
+import Banner from "../components/Banner";
+import BannerImg from "../assets/Images/Banner.jpeg";
 import pdfFile from "../assets/pdf/pdf.pdf";
 import thumbnailImage from "../assets/Images/image.png";
-import Banner from "../components/Banner";
 
-
-function CTWorld() {
-  const [searchQuery, setSearchQuery] = useState("");
-
+function CTWorld({ searchQuery }) {
   const cards = [
     {
       imageSrc: thumbnailImage,
@@ -66,15 +63,13 @@ function CTWorld() {
     },
   ];
 
-
   const filteredCards = cards.filter((card) =>
     card.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div className=" bg-gray-50 min-h-screen">
-      <Navbar onSearch={setSearchQuery} />
-      <Banner/>
+      <Banner imageUrl={BannerImg} altText="Banner" />
       <h1 className="text-3xl font-bold text-blue-900 mb-6 mt-10 pl-8">
         CT WORLD
       </h1>
@@ -99,5 +94,9 @@ function CTWorld() {
     </div>
   );
 }
+
+CTWorld.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+};
 
 export default CTWorld;

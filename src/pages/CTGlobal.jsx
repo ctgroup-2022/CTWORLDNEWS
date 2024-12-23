@@ -1,14 +1,11 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
 import NewsCard from "../components/NewsCard";
-import Navbar from "../components/Navbar/Navbar";
-import pdfFile from "../assets/pdf/pdf.pdf";
-import thumbnailImage from "../assets/Images/image.png";
 import Banner from "../components/Banner";
 import BannerImg from "../assets/Images/Banner.jpeg";
+import pdfFile from "../assets/pdf/pdf.pdf";
+import thumbnailImage from "../assets/Images/image.png";
 
-function CTGlobal() {
-  const [searchQuery, setSearchQuery] = useState("");
-
+function CTGlobal({ searchQuery }) {
   const cards = [
     {
       imageSrc: thumbnailImage,
@@ -71,8 +68,7 @@ function CTGlobal() {
   );
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <Navbar onSearch={setSearchQuery} />
+    <div className=" bg-gray-50 min-h-screen">
       <Banner imageUrl={BannerImg} altText="Banner" />
       <h1 className="text-3xl font-bold text-blue-900 mb-6 mt-10 pl-8">
         CT GLOBAL
@@ -98,5 +94,9 @@ function CTGlobal() {
     </div>
   );
 }
+
+CTGlobal.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+};
 
 export default CTGlobal;
