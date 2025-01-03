@@ -1,5 +1,35 @@
-import { useState } from "react";
+import { Worker, Viewer } from "@react-pdf-viewer/core";
+import { pdfjs } from "react-pdf";
+import "@react-pdf-viewer/core/lib/styles/index.css";
 import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import { FaDownload, FaEye, FaTag } from "react-icons/fa";
+import { toolbarPlugin } from "@react-pdf-viewer/toolbar";
+import "@react-pdf-viewer/toolbar/lib/styles/index.css";
+import '../App.css'; // Ensure your global styles are defined here
+
+// Make sure PDF.js worker is set properly
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+
+// Error Boundary Component
+class ErrorBoundary extends React.Component {
+  state = { hasError: false };
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    console.error("Error in PDF Viewer:", error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div>Error loading PDF viewer.</div>;
+    }
+    return this.props.children;
+  }
+}
 
 const NewsCard = ({
   imageSrc,
@@ -7,16 +37,13 @@ const NewsCard = ({
   pdfSrc,
   title,
   date,
+  categories = [],
   onDownloadFileName = "news-pdf.pdf",
 }) => {
   const [isReadMoreOpen, setIsReadMoreOpen] = useState(false);
+  const [theme, setTheme] = useState("light"); // Default theme
 
-  // Toggle PDF Preview Modal
-  const toggleReadMore = () => {
-    setIsReadMoreOpen((prevState) => !prevState);
-  };
-
-  // Handle PDF Download
+  const toggleReadMore = () => setIsReadMoreOpen((prevState) => !prevState);
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = pdfSrc;
@@ -24,12 +51,21 @@ const NewsCard = ({
     link.click();
   };
 
+  const toolbarPluginInstance = toolbarPlugin();
+  const { Toolbar } = toolbarPluginInstance;
+
+  // Effect to switch themes
+  useEffect(() => {
+    document.body.classList.toggle("dark-theme", theme === "dark");
+  }, [theme]);
+
   return (
     <div className="my-6 flex justify-center">
       {/* Card Container */}
       <div
-        className="rounded-lg shadow-lg overflow-hidden bg-white max-w-sm w-full hover:shadow-2xl transition-shadow duration-300"
-        onClick={() => toggleReadMore()}
+        className="rounded-lg shadow-2xl overflow-hidden bg-white max-w-sm w-full hover:shadow-2xl transition-transform transform hover:-translate-y-2 duration-300"
+        onClick={toggleReadMore}
+        style={{ backgroundColor: "var(--card-bg-color)", color: "var(--card-text-color)" }}
       >
         {/* Image Section */}
         <div className="relative">
@@ -42,17 +78,32 @@ const NewsCard = ({
           <span className="absolute top-2 left-2 bg-gray-800 text-white text-sm px-3 py-1 rounded">
             {date}
           </span>
+
+          {/* Categories on Image */}
+          {categories.length > 0 && (
+            <div className="absolute top-2 right-2 flex flex-col gap-1">
+              {categories.map((category, index) => (
+                <span
+                  key={index}
+                  className="bg-[#1F2937] text-white text-xs px-3 py-1 rounded-full flex items-center gap-1 shadow"
+                  style={{ fontSize: "0.75rem" }}
+                >
+                  <FaTag /> {category}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Content Section */}
         <div className="p-6">
           {/* Title */}
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3 line-clamp-2">
+          <h2 className="text-2xl font-semibold mb-3 line-clamp-2">
             {title}
           </h2>
 
           {/* Description */}
-          <p className="text-gray-600 text-sm line-clamp-3 leading-6 mb-4">
+          <p className="text-sm line-clamp-3 leading-6 mb-4">
             {description}
           </p>
 
@@ -64,17 +115,17 @@ const NewsCard = ({
                 e.stopPropagation(); // Prevent the click event on the main card container
                 toggleReadMore();
               }}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded transition duration-200"
+              className="bg-[#155DA8] hover:bg-[#0E4A85] text-white font-medium px-4 py-2 rounded transition duration-200 flex items-center gap-2"
             >
-              View PDF
+              <FaEye /> View PDF
             </button>
 
             {/* Download Button */}
             <button
               onClick={handleDownload}
-              className="bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded transition duration-200"
+              className="bg-[#155DA8] hover:bg-[#0E4A85] text-white font-medium px-4 py-2 rounded transition duration-200 flex items-center gap-2"
             >
-              Download
+              <FaDownload /> Download
             </button>
           </div>
         </div>
@@ -83,23 +134,35 @@ const NewsCard = ({
       {/* PDF Preview Modal */}
       {isReadMoreOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-2xl w-11/12 md:w-3/4 lg:w-1/2 h-[90%] p-4 relative">
+          <div className="bg-white rounded-lg shadow-2xl w-11/12 md:w-3/4 lg:w-1/2 h-[90%] p-4 relative overflow-hidden">
             {/* Close Button */}
             <button
               onClick={toggleReadMore}
-              className="absolute top-3 right-3 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg hover:bg-red-700 transition duration-200"
+              className="absolute top-3 right-3 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg hover:bg-red-700 transition duration-200 z-10"
               aria-label="Close"
             >
               &times;
             </button>
 
             {/* PDF Viewer */}
-            <iframe
-              src={pdfSrc}
-              title="PDF Preview"
-              className="w-full h-full rounded-lg border-none"
-              style={{ maxHeight: "80vh" }} // Responsive height for mobile
-            ></iframe>
+            <ErrorBoundary>
+              <div className="w-full h-full overflow-auto">
+                <Worker workerUrl={pdfjs.GlobalWorkerOptions.workerSrc}>
+                  <div className="mb-8">
+                
+                  </div>
+                  <Toolbar />
+                  <Viewer
+                    fileUrl={pdfSrc}
+                    plugins={[toolbarPluginInstance]}
+                    renderError={(error) => {
+                      console.error("Error loading PDF:", error);
+                      return <div>Error loading PDF</div>;
+                    }}
+                  />
+                </Worker>
+              </div>
+            </ErrorBoundary>
           </div>
         </div>
       )}
@@ -113,6 +176,7 @@ NewsCard.propTypes = {
   pdfSrc: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string),
   onDownloadFileName: PropTypes.string,
 };
 

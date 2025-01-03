@@ -1,14 +1,17 @@
-import Navbar from "../Navbar/Navbar";
+
+import { useTheme } from "../context/ThemeContext"; // Import useTheme hook
 
 
 const TermsOfService = () => {
+      const { theme } = useTheme(); // Get theme context value
+    
   return (
     <>
-    <Navbar/>
-    <div className=" flex justify-center items-center min-h-screen mt-8 mb-8">
+
+<div className={`flex justify-center items-center min-h-screen pt-28 pb-8 ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-800'}`}>
       {/* Main Container */}
-      <div className="bg-white w-11/12 md:w-10/12 lg:w-4/5 h-full p-8 shadow-lg overflow-y-auto">
-        <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">
+      <div className={`w-11/12 md:w-10/12 lg:w-4/5 p-8 shadow-lg overflow-y-auto ${theme === 'light' ? 'bg-white text-gray-900' : 'bg-gray-800 text-white'}`}>
+        <h1 className={`text-4xl font-bold mb-6 text-center ${theme === 'light' ? 'text-[#195CA0]' : 'text-[#FBCC14]'}`}>
           Terms of Service
         </h1>
         <p className="text-gray-600 mb-6 text-center">
@@ -90,12 +93,12 @@ const TermsOfService = () => {
               If you have any questions regarding these terms, please contact us
               at{" "}
               <a
-                href="mailto:terms@ceeteeworld.com"
+                href="mailto:info@ctgroup.in"
                 className="text-blue-600 underline"
               >
-                terms@ceeteeworld.com
+            info@ctgroup.in
               </a>
-              .
+              
             </p>
           </section>
         </div>
