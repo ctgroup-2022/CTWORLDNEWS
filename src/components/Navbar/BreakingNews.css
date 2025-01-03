@@ -1,0 +1,60 @@
+/* Fade In Animation (Desktop only) */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade Out Animation (Desktop only) */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+}
+
+/* Scrolling Animation (Mobile only) */
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Default News Text Styles */
+.news-text {
+  white-space: nowrap;
+  display: inline-block;
+  transition: opacity 1s ease, transform 1s ease;
+  text-align: center; /* Center the text */
+  width: 100%; /* Take up full width for centering */
+}
+
+/* Fade Effects for Desktop */
+.show-news {
+  animation: fadeIn 1s forwards;
+}
+.hide-news {
+  animation: fadeOut 1s forwards;
+}
+
+/* Scrolling Effect for Mobile */
+@media (max-width: 768px) {
+  .news-text {
+    animation: scroll 15s linear infinite; /* Continuous scroll for mobile */
+    opacity: 1; /* Always visible on mobile */
+    transform: none; /* No vertical transform */
+    text-align: left; /* Align text to start on mobile for scrolling */
+  }
+}

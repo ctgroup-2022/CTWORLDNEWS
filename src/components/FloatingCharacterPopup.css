@@ -1,0 +1,31 @@
+.floating-popup {
+  position: fixed;
+  top: 30%; /* You can adjust this value as needed */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999; /* Ensure it stays on top of other elements */
+
+  will-change: transform, opacity; /* This improves performance and avoids blur when animating */
+}
+
+.floating-popup img {
+  will-change: transform; /* Add will-change for smooth animation */
+}
+
+.floating-popup div {
+  background-color: #195CA0; /* Set the theme color */
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.floating-popup a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.floating-popup a:hover {
+  background-color: #ffffff;
+  color: #195CA0;
+}

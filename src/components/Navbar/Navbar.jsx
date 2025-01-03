@@ -1,168 +1,119 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
-import HeadlineSection from "./HeadlineSection";
-import PropTypes from "prop-types";
-import Logo from "../../assets/Images/Logo.png"; // Import the logo file
+import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
+import { useTheme } from '../../context/ThemeContext';
+import BlueLogo from '../../assets/Images/Blue_Logo.png'; // Import the blue logo
+import Logo from '../../assets/Images/Logo.png'; // Import the dark theme logo
+import '../../index.css';
 
-const Navbar = ({ onSearch }) => {
-  Navbar.propTypes = {
-    onSearch: PropTypes.func.isRequired,
+const Navbar = ({ searchQuery, onSearch }) => {
+  const handleSearchChange = (event) => {
+    onSearch(event.target.value);
   };
+  const { theme, toggleTheme } = useTheme();
+  const [searchVisible, setSearchVisible] = useState(false); // For toggling search bar in mobile view
 
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [search, setSearch] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    document.body.classList.toggle('dark', theme === 'dark');
+  }, [theme]);
 
-  const toggleSearch = () => setSearchOpen(!searchOpen);
 
-  const handleSearch = (e) => {
-    const value = e.target.value;
-    setSearch(value);
-    onSearch(value); // Call the parent function with the search value
-  };
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  const subNavLinks = [
-    "CT University",
-    "CT Public",
-    "CT World",
-    "CT Global",
-    "CT Shahpur",
-    "CT Maqsudan",
-  ];
 
   return (
-    <>
-      <nav className="bg-blue-600 shadow-lg fixed w-full top-0 left-0 z-10">
-        <div className="container mx-auto flex justify-between items-center px-4 py-2">
-          {/* Logo */}
-          <div className="flex items-center">
-            <img
-              src={Logo}
-              alt="CEETEEWORLD Logo"
-              className="h-16 w-28" // Set proper logo height and width
-            />
-          </div>
+    <nav
+      className={`fixed w-screen top-0 left-0 z-10 ${
+        theme === 'light' ? 'bg-white' : 'bg-gray-800'
+      } shadow-lg transition-all duration-300`}
+    >
+      <div className="container mx-auto flex justify-between items-center px-6 py-3">
+        {/* Logo */}
+        <img
+          src={theme === 'light' ? BlueLogo : Logo}
+          alt="CEETEEWORLD Logo"
+          className="h-16 w-28"
+        />
+        
 
-          {/* Hamburger Menu Button for Mobile */}
-          <button
-            onClick={toggleMenu}
-            className="md:hidden text-white text-3xl focus:outline-none"
+        {/* Search Bar for Larger Screens */}
+        <div className="hidden md:flex items-center">
+          <div
+            className={`flex items-center px-4 py-2 rounded-lg border ${
+              theme === 'light'
+                ? 'bg-gray-100 text-gray-800 border-gray-300'
+                : 'bg-gray-700 text-white border-gray-600'
+            }`}
           >
-            {menuOpen ? <FontAwesomeIcon icon={faTimes} /> : <span>☰</span>}
-          </button>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-6 text-white">
-            <Link
-              to="/"
-              className="hover:text-yellow-400 transition duration-300 transform hover:scale-105"
-            >
-              Home
-            </Link>
-          
-            <Link
-              to="/login"
-              className="hover:text-yellow-400 transition duration-300 transform hover:scale-105"
-            >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              className="hover:text-yellow-400 transition duration-300 transform hover:scale-105"
-            >
-              Signup
-            </Link>
-          </div>
-
-          {/* Search Bar for Desktop */}
-          <div className="hidden md:flex relative items-center">
-            <button
-              onClick={toggleSearch}
-              className="text-white text-2xl focus:outline-none"
-            >
-              {searchOpen ? (
-                <FontAwesomeIcon icon={faTimes} />
-              ) : (
-                <FontAwesomeIcon icon={faSearch} />
-              )}
-            </button>
+            <FontAwesomeIcon icon={faSearch} className="text-2xl mr-2" />
             <input
               type="text"
               placeholder="Search..."
-              value={search}
-              onChange={handleSearch}
-              className={`ml-2 transition-all duration-300 rounded-full bg-white text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-yellow-300 ${
-                searchOpen ? "w-48 opacity-100" : "w-0 opacity-0"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className={`w-full bg-transparent outline-none ${
+                theme === 'light' ? 'text-gray-800' : 'text-white'
               }`}
             />
           </div>
         </div>
 
-        {/* Desktop SubNavbar */}
-        <div className="hidden md:flex bg-blue-600 shadow-lg w-full">
-          <div className="container mx-auto flex justify-center items-center py-2 space-x-2">
-            {subNavLinks.map((item, index) => (
-              <Link
-                key={item}
-                to={`/${item.replace(" ", "").toLowerCase()}`}
-                className={`transition-all duration-300 text-white font-semibold hover:text-yellow-400 hover:scale-110 hover:bg-blue-700 py-1 px-2 rounded-lg ${
-                  index < 2 ? "text-center" : ""
-                }`}
-              >
-                {item}
-              </Link>
-            ))}
+        {/* Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          className={`px-4 py-2 rounded-full focus:outline-none transition-transform duration-500 ${
+            theme === 'light' ? 'bg-blue-500 text-white' : 'bg-yellow-400 text-black'
+          } hover:scale-110`}
+        >
+          <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun} className="text-2xl" />
+        </button>
+
+        {/* Search Icon for Mobile View */}
+        <button
+          onClick={() => setSearchVisible(!searchVisible)}
+          className={`md:hidden px-4 py-2 rounded-full focus:outline-none transition-transform duration-500 ${
+            theme === 'light' ? 'text-gray-800' : 'text-white'
+          } hover:scale-110`}
+        >
+          <FontAwesomeIcon icon={faSearch} className="text-2xl" />
+        </button>
+      </div>
+
+      {/* Mobile Search Bar */}
+      {searchVisible && (
+        <div
+          className={`md:hidden px-6 py-3 ${
+            theme === 'light' ? 'bg-gray-50' : 'bg-gray-900'
+          } transition-all duration-300`}
+        >
+          <div
+            className={`flex items-center px-4 py-2 rounded-lg border ${
+              theme === 'light'
+                ? 'bg-gray-100 text-gray-800 border-gray-300'
+                : 'bg-gray-700 text-white border-gray-600'
+            }`}
+          >
+            <FontAwesomeIcon icon={faSearch} className="text-2xl mr-2" />
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className={`w-full bg-transparent outline-none ${
+                theme === 'light' ? 'text-gray-800' : 'text-white'
+              }`}
+            />
           </div>
         </div>
+      )}
 
-        {/* Mobile Menu Dropdown */}
-        {menuOpen && (
-          <div className="md:hidden bg-blue-600 space-y-4 px-4 py-2">
-            <Link to="/" className="block text-white hover:text-yellow-400">
-              Home
-            </Link>
-            
-            <Link
-              to="/login"
-              className="block text-white hover:text-yellow-400"
-            >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              className="block text-white hover:text-yellow-400"
-            >
-              Signup
-            </Link>
-
-            {/* Subnavbar */}
-
-            <hr className="border-t border-yellow-300" />
-            {subNavLinks.map((item) => (
-              <Link
-                key={item}
-                to={`/${item.replace(" ", "").toLowerCase()}`}
-                className="block text-white hover:text-yellow-400"
-              >
-                {item}
-              </Link>
-            ))}
-          </div>
-        )}
-      </nav>
-
-      {/* Headline Section */}
-      <div className="mt-[80px] md:mt-[120px] lg:mt-[120px]">
-        <HeadlineSection />
-      </div>
-    </>
+   
+    </nav>
   );
+};
+
+Navbar.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default Navbar;

@@ -1,5 +1,7 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import PropTypes from "prop-types";
 
+// Create a Context for Theme
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
@@ -9,12 +11,9 @@ export const ThemeProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('theme', theme);
+    // Apply theme globally
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('theme', theme); // Persist theme
   }, [theme]);
 
   const toggleTheme = () => {
@@ -28,4 +27,9 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+// Custom hook to use the theme context
 export const useTheme = () => useContext(ThemeContext);
