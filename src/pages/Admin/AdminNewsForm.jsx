@@ -1,15 +1,46 @@
 import React, { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const AdminNewsForm = () => {
   const [news, setNews] = useState({
     title: "",
-    content: "",
-    author: "",
+    description: "",
+    date: "",
     category: "",
+    image: null,
+    pdf: null,
   });
 
   const handleChange = (e) => {
-    setNews({ ...news, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setNews({ ...news, [name]: value });
+  };
+
+  const handleDescriptionChange = (value) => {
+    setNews({ ...news, description: value });
+  };
+
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    const file = files[0];
+
+    if (name === "image") {
+      const validTypes = ["image/jpeg", "image/png"];
+      if (!validTypes.includes(file.type) || file.size > 1048576) {
+        alert("Image must be a JPG/PNG file and less than 1 MB");
+        return;
+      }
+    }
+
+    if (name === "pdf") {
+      if (file.type !== "application/pdf") {
+        alert("Only PDF files are allowed");
+        return;
+      }
+    }
+
+    setNews({ ...news, [name]: file });
   };
 
   const handleSubmit = (e) => {
@@ -35,22 +66,20 @@ const AdminNewsForm = () => {
         />
       </div>
       <div className="space-y-2">
-        <label className="block text-gray-700 dark:text-gray-300">Content</label>
-        <textarea
-          name="content"
-          value={news.content}
-          onChange={handleChange}
-          className="w-full px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-md focus:outline-none"
-          rows="4"
+        <label className="block text-gray-700 dark:text-gray-300">Description</label>
+        <ReactQuill
+          value={news.description}
+          onChange={handleDescriptionChange}
+          className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-md focus:outline-none"
           required
         />
       </div>
       <div className="space-y-2">
-        <label className="block text-gray-700 dark:text-gray-300">Author</label>
+        <label className="block text-gray-700 dark:text-gray-300">Date</label>
         <input
-          type="text"
-          name="author"
-          value={news.author}
+          type="date"
+          name="date"
+          value={news.date}
           onChange={handleChange}
           className="w-full px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-md focus:outline-none"
           required
@@ -58,11 +87,37 @@ const AdminNewsForm = () => {
       </div>
       <div className="space-y-2">
         <label className="block text-gray-700 dark:text-gray-300">Category</label>
-        <input
-          type="text"
+        <select
           name="category"
           value={news.category}
           onChange={handleChange}
+          className="w-full px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-md focus:outline-none"
+          required
+        >
+          <option value="">Select Category</option>
+          <option value="Sports">Sports</option>
+          <option value="Announcements">Announcements</option>
+          <option value="Events">Events</option>
+        </select>
+      </div>
+      <div className="space-y-2">
+        <label className="block text-gray-700 dark:text-gray-300">Image Upload</label>
+        <input
+          type="file"
+          name="image"
+          accept="image/jpeg, image/png"
+          onChange={handleFileChange}
+          className="w-full px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-md focus:outline-none"
+          required
+        />
+      </div>
+      <div className="space-y-2">
+        <label className="block text-gray-700 dark:text-gray-300">PDF Upload</label>
+        <input
+          type="file"
+          name="pdf"
+          accept="application/pdf"
+          onChange={handleFileChange}
           className="w-full px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-md focus:outline-none"
           required
         />

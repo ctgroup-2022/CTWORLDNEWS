@@ -1,67 +1,85 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { FaNewspaper, FaHeading, FaHome, FaMoon, FaSun } from "react-icons/fa";
+import { FaNewspaper, FaHeading, FaHome, FaMoon, FaSun, FaUser, FaSignOutAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const AdminSidebar = ({ theme, toggleTheme }) => {
+const AdminSidebar = ({ theme, toggleTheme, activeTab, setActiveTab }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
-    <div
+    <motion.div
+      initial={{ x: -200 }}
+      animate={{ x: 0 }}
+      transition={{ duration: 0.5 }}
       className={`${
-        isOpen ? "w-64" : "w-16"
-      } h-screen bg-gray-100 dark:bg-gray-900 shadow-lg transition-all duration-300 flex flex-col`}
+        isOpen ? "w-64" : "w-20"
+      } h-screen bg-gradient-to-br from-purple-500 to-indigo-600 dark:from-gray-800 dark:to-gray-900 shadow-lg transition-all duration-300 flex flex-col text-white`}
     >
       <button
         onClick={toggleSidebar}
-        className="p-4 text-gray-700 dark:text-gray-300 focus:outline-none hover:bg-gray-300 dark:hover:bg-gray-800"
+        className="p-4 flex items-center justify-center text-white hover:bg-indigo-700 dark:hover:bg-gray-700 focus:outline-none"
       >
-        {isOpen ? "Close" : "Open"}
+        {isOpen ? "<<" : ">>"}
       </button>
 
       <nav className="mt-4 space-y-4">
-        <NavLink
-          to="/admin"
-          className="flex items-center space-x-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-800"
-          activeClassName="bg-gray-300 dark:bg-gray-800"
+        <button
+          onClick={() => handleTabClick("dashboard")}
+          className={`flex items-center space-x-4 px-4 py-3 rounded-lg hover:bg-indigo-700 dark:hover:bg-gray-700 ${{
+            activeTab: "dashboard"
+          }}`}
         >
-          <FaHome />
+          <FaHome size={20} />
           {isOpen && <span>Dashboard</span>}
-        </NavLink>
-        <NavLink
-          to="/admin/news"
-          className="flex items-center space-x-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-800"
-          activeClassName="bg-gray-300 dark:bg-gray-800"
+        </button>
+
+        <button
+          onClick={() => handleTabClick("news")}
+          className="flex items-center space-x-4 px-4 py-3 rounded-lg hover:bg-indigo-700 dark:hover:bg-gray-700"
         >
-          <FaNewspaper />
+          <FaNewspaper size={20} />
           {isOpen && <span>News</span>}
-        </NavLink>
-        <NavLink
-          to="/admin/headlines"
-          className="flex items-center space-x-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-800"
-          activeClassName="bg-gray-300 dark:bg-gray-800"
+        </button>
+
+        <button
+          onClick={() => handleTabClick("headlines")}
+          className="flex items-center space-x-4 px-4 py-3 rounded-lg hover:bg-indigo-700 dark:hover:bg-gray-700"
         >
-          <FaHeading />
+          <FaHeading size={20} />
           {isOpen && <span>Headlines</span>}
-        </NavLink>
+        </button>
       </nav>
 
       <div className="mt-auto p-4">
         <button
           onClick={toggleTheme}
-          className="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-800"
+          className="flex items-center px-4 py-3 rounded-lg hover:bg-indigo-700 dark:hover:bg-gray-700"
         >
-          {theme === "dark" ? <FaSun /> : <FaMoon />}
+          {theme === "dark" ? <FaSun size={20} /> : <FaMoon size={20} />}
           {isOpen && (
             <span className="ml-2">{theme === "dark" ? "Light" : "Dark"} Mode</span>
           )}
         </button>
+
+        <button className="flex items-center px-4 py-3 mt-4 rounded-lg hover:bg-indigo-700 dark:hover:bg-gray-700">
+          <FaUser size={20} />
+          {isOpen && <span className="ml-2">Profile</span>}
+        </button>
+
+        <button className="flex items-center px-4 py-3 mt-4 rounded-lg hover:bg-red-500 dark:hover:bg-red-700">
+          <FaSignOutAlt size={20} />
+          {isOpen && <span className="ml-2">Logout</span>}
+        </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
