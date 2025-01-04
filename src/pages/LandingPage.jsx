@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import hiImage from "../assets/Images/hi.png";
 const Landing = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [hideContent, setHideContent] = useState(false);
@@ -29,7 +29,7 @@ const Landing = () => {
         >
           <motion.img
             className="object-contain w-32 md:w-40"
-            src="src/assets/Images/hi.png"
+            src={hiImage}
             alt="Hi"
             animate={{ y: [-10, 10, 0] }}
             transition={{ delay: 1, duration: 1, ease: "easeInOut" }}
