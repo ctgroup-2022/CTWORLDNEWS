@@ -42,18 +42,16 @@ function AppContent({ searchQuery, setSearchQuery }) {
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
   const isAdminDashboard = location.pathname === "/admin";
-
+ 
   return (
     <>
-
-      {/* Panel animati */}
-      <Panels key={location.pathname} /> Key ensures remount on route change
-
+      {/* Panel animation */}
+      {!isLandingPage &&  <Panels key={location.pathname} />}
       {/* Floating Character Popup */}
       <FloatingCharacterPopup /> {/* This will be rendered on every route */}
 
       {/* Conditionally render Navbar */}
-      {(!isLandingPage && !isAdminDashboard) &&<Navbar searchQuery={searchQuery} onSearch={setSearchQuery} />}
+      {(!isLandingPage && !isAdminDashboard) && <Navbar searchQuery={searchQuery} onSearch={setSearchQuery} />}
 
       {/* Route definitions */}
       <Routes>
@@ -76,9 +74,8 @@ function AppContent({ searchQuery, setSearchQuery }) {
       </Routes>
 
       {/* Conditionally render Footer */}
-      {(!isLandingPage && !isAdminDashboard)&& <Footer />}
-      </>
-    
+      {(!isLandingPage && !isAdminDashboard) && <Footer />}
+    </>
   );
 }
 

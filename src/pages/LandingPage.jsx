@@ -40,7 +40,7 @@ const Landing = () => {
       {/* Welcome Text */}
       {showMessage && !hideContent && (
         <motion.div
-          className="absolute bottom-[100px] right-[100px]  text-white font-semibold text-lg z-10 bg-gray-800 p-3 rounded-md shadow-lg"
+          className="absolute bottom-[100px] right-[100px] text-white font-semibold text-lg z-10 bg-gray-800 p-3 rounded-md shadow-lg"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -51,12 +51,14 @@ const Landing = () => {
       )}
 
       {/* Buttons - Always Visible */}
-      <div className="flex flex-col items-center z-20 mt-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+      <div className="flex flex-col items-center z-20 mt-12 px-4 text-center">
+        <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
           Welcome to <span className="text-yellow-400">CT World News</span>
         </h1>
-        <p className="text-gray-300 mb-8">Start your journey with us today!</p>
-        <div className="flex gap-4">
+        <p className="text-gray-300 mb-8 text-sm md:text-lg">
+          Start your journey with us today!
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4">
           <Link
             to="/login"
             className="px-6 py-3 text-lg font-semibold bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-400 hover:scale-105 transition-transform"
