@@ -45,7 +45,8 @@ function AppContent({ searchQuery, setSearchQuery }) {
 
   return (
     <>
-      {/* Panel animation */}
+
+      {/* Panel animati */}
       <Panels key={location.pathname} /> Key ensures remount on route change
 
       {/* Floating Character Popup */}
