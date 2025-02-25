@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-300 dark:from-gray-800 dark:to-black">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 mt-12">
       <motion.div
         className="bg-white dark:bg-gray-900 shadow-lg rounded-lg px-8 py-10 max-w-md w-full"
         initial={{ opacity: 0, scale: 0.8 }}

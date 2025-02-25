@@ -8,11 +8,19 @@ const Panels = ({ section }) => {
 
     tl.to(".panel:first-child, .panel:last-child", {
       scaleY: 1,
+      height: "100vh",
+      zIndex: 20, // Increased z-index
       duration: 1,
     })
-      .to(".panel:not(:first-child):not(:last-child)", { scaleY: 1 }, "-=0.5")
+      .to(".panel:not(:first-child):not(:last-child)", { 
+        scaleY: 1, 
+        height: "100vh",
+        zIndex: 20, // Increased z-index
+      }, "-=0.5")
       .to(".panel", {
         scaleY: 0,
+        height: "0vh",
+        zIndex: 0,
         duration: 0.3,
         stagger: 0.05,
       })

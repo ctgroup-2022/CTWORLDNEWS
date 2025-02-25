@@ -13,6 +13,9 @@ import thumbnail1 from "../assets/Images/thumb1.png";
 import thumbnail2 from "../assets/Images/thumb2.png";
 import ReactPaginate from "react-paginate";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Importing icons for previous and next buttons
+import '../index.css';
+import JoinedImageArches from "../components/Navbar/joined-image-arches";
+import SplitScreenBlob from "../components/SplitScreenBlob";
 
 function CTMaqsudan({ searchQuery }) {
   const { theme } = useTheme();
@@ -361,13 +364,14 @@ function CTMaqsudan({ searchQuery }) {
 
   ];
 
-  
+
   const filteredCards = cards.filter((card) =>
     card.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const [currentPage, setCurrentPage] = useState(0);
-  const cardsPerPage = 21;
+  const cardsPerPage = 8;
+
   const pageCount = Math.ceil(filteredCards.length / cardsPerPage);
 
   const handlePageClick = ({ selected }) => {
@@ -394,13 +398,42 @@ function CTMaqsudan({ searchQuery }) {
       <div className={`${theme === 'light' ? 'bg-gray-50' : 'bg-gray-800'}`}>
         <Banner imageUrl={BannerImg} altText="Banner" />
       </div>
+      <div className="relative flex flex-col items-center">
+        {/* Heading */}
+        <h1
+          className={`text-4xl text-center mt-4 font-bold ${theme === 'light' ? 'text-[#195CA0]' : 'text-[#FBCC12]'
+            }`}
+        >
+          CT MAQSUDAN
+        </h1>
 
-      {/* SubNavLinks directly after Banner */}
-      <div className={`${theme === 'light' ? 'bg-gray-50' : 'bg-gray-800'}`}>
-        <SubNavLinks links={subNavLinks} theme={theme} />
+        {/* SVG Underline */}
+        <svg
+          width="180"
+          height="10"
+          viewBox="0 0 180 10"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="mt-2"
+        >
+          <line
+            x1="0"
+            y1="5"
+            x2="180"
+            y2="5"
+            stroke={theme === 'light' ? '#195CA0' : '#FBCC12'}
+            strokeWidth="4"
+            strokeLinecap="round"
+            className="animate-draw"
+          />
+        </svg>
       </div>
 
-      <h1 className={`text-3xl font-bold mb-6 pl-8 ${theme === 'light' ? 'text-[#195CA0]' : 'text-[#FBCC12]'}`}>CT MAQSUDAN</h1>
+      {/* SubNavLinks directly after Banner */}
+      <div className={` my-8 ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-800'}`}>
+        <JoinedImageArches />
+      </div>
+
 
       {/* Pagination */}
       <div className="flex justify-center mb-6">
@@ -459,6 +492,9 @@ function CTMaqsudan({ searchQuery }) {
         ) : (
           <p className={`${theme === 'light' ? 'text-gray-50' : 'text-gray-600'}`}>No results found.</p>
         )}
+      </div>
+      <div className="">
+        <SplitScreenBlob />
       </div>
     </div>
   );

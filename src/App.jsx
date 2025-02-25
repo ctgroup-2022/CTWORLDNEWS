@@ -80,3 +80,6 @@ function AppContent({ searchQuery, setSearchQuery }) {
 }
 
 export default App;
+
+
+

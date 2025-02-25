@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import NewsCard from "../components/NewsCard";
@@ -13,7 +12,10 @@ import thumbnail1 from "../assets/Images/thumb1.png";
 import thumbnail2 from "../assets/Images/thumb2.png";
 import ReactPaginate from "react-paginate";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Importing icons for previous and next buttons
-
+import '../index.css'
+import ctshahpur from "../assets/Images/ctshahpur.png";
+import JoinedImageArches from "../components/Navbar/joined-image-arches";
+import SplitScreenBlob from "../components/SplitScreenBlob";
 function CTPublic({ searchQuery }) {
   const { theme } = useTheme();
 
@@ -361,13 +363,13 @@ function CTPublic({ searchQuery }) {
 
   ];
 
-  
+
   const filteredCards = cards.filter((card) =>
     card.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const [currentPage, setCurrentPage] = useState(0);
-  const cardsPerPage = 21;
+  const cardsPerPage = 8;
   const pageCount = Math.ceil(filteredCards.length / cardsPerPage);
 
   const handlePageClick = ({ selected }) => {
@@ -377,13 +379,38 @@ function CTPublic({ searchQuery }) {
   const offset = currentPage * cardsPerPage;
   const currentCards = filteredCards.slice(offset, offset + cardsPerPage);
 
-  const subNavLinks = [
-    { name: "CT University", gradient: "from-red-400 to-pink-500", route: "/ctuniversity" },
-    { name: "CT Public", gradient: "from-green-400 to-blue-500", route: "/ctpublic" },
-    { name: "CT World", gradient: "from-purple-400 to-indigo-500", route: "/ctworld" },
-    { name: "CT Global", gradient: "from-yellow-400 to-orange-500", route: "/ctglobal" },
-    { name: "CT Shahpur", gradient: "from-teal-400 to-cyan-500", route: "/ctshahpur" },
-    { name: "CT Maqsudan", gradient: "from-gray-400 to-gray-600", route: "/ctmaqsudan" },
+  const images = [
+    {
+      src: ctshahpur, // Big Image 1
+      alt: 'Big Image 1',
+      label: 'CT Public School',
+    },
+    {
+      src: ctshahpur, // Big Image 1
+      // Small Image 1
+      alt: 'Small Image 1',
+      label: 'CT Group of Institutions',
+    },
+    {
+      src: ctshahpur, // Big Image 2
+      alt: 'Big Image 2',
+      label: 'CT University',
+    },
+    {
+      src: ctshahpur, // Small Image 2
+      alt: 'Small Image 2',
+      label: 'CT World School',
+    },
+    {
+      src: ctshahpur, // Big Image 3
+      alt: 'Big Image 3',
+      label: 'CT Global Education',
+    },
+    {
+      src: ctshahpur, // Small Image 3
+      alt: 'Small Image 3',
+      label: 'CT Transformation',
+    },
   ];
 
   return (
@@ -395,12 +422,43 @@ function CTPublic({ searchQuery }) {
         <Banner imageUrl={BannerImg} altText="Banner" />
       </div>
 
-      {/* SubNavLinks directly after Banner */}
-      <div className={`${theme === 'light' ? 'bg-gray-50' : 'bg-gray-800'}`}>
-        <SubNavLinks links={subNavLinks} theme={theme} />
+      <div className="relative flex flex-col items-center">
+        {/* Heading */}
+        <h1
+          className={`text-4xl text-center mt-4 font-bold ${theme === 'light' ? 'text-[#195CA0]' : 'text-[#FBCC12]'
+            }`}
+        >
+          CT PUBLIC
+        </h1>
+
+        {/* SVG Underline */}
+        <svg
+          width="180"
+          height="10"
+          viewBox="0 0 180 10"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="mt-2"
+        >
+          <line
+            x1="0"
+            y1="5"
+            x2="180"
+            y2="5"
+            stroke={theme === 'light' ? '#195CA0' : '#FBCC12'}
+            strokeWidth="4"
+            strokeLinecap="round"
+            className="animate-draw"
+          />
+        </svg>
       </div>
 
-      <h1 className={`text-3xl font-bold mb-6 pl-8 ${theme === 'light' ? 'text-[#195CA0]' : 'text-[#FBCC12]'}`}>CT PUBLIC</h1>
+
+
+      {/* SubNavLinks directly after Banner */}
+      <div className={` my-8 ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-800'}`}>
+        <JoinedImageArches />
+      </div>
 
       {/* Pagination */}
       <div className="flex justify-center mb-6">
@@ -442,8 +500,6 @@ function CTPublic({ searchQuery }) {
         />
       </div>
 
-
-
       <div className="flex flex-wrap justify-center gap-6">
         {currentCards.length > 0 ? (
           currentCards.map((card, index) => (
@@ -461,6 +517,9 @@ function CTPublic({ searchQuery }) {
         ) : (
           <p className={`${theme === 'light' ? 'text-gray-50' : 'text-gray-600'}`}>No results found.</p>
         )}
+      </div>
+      <div className="">
+        <SplitScreenBlob />
       </div>
     </div>
   );

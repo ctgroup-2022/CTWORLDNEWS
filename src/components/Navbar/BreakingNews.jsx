@@ -23,18 +23,16 @@ const BreakingNews = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Fade animation logic for desktop
+  // Fade animation logic for desktop and mobile
   useEffect(() => {
-    if (!isMobile) {
-      const interval = setInterval(() => {
-        setIsVisible(false); // Start hiding animation
-        setTimeout(() => {
-          setCurrentNewsIndex((prevIndex) => (prevIndex + 1) % newsItems.length); // Move to the next news item
-          setIsVisible(true); // Show the next news item
-        }, 1000); // Ensure hiding animation completes before showing the next news
-      }, 4000); // Total duration for one news item (visible + hidden)
-      return () => clearInterval(interval); // Cleanup on component unmount
-    }
+    const interval = setInterval(() => {
+      setIsVisible(false); // Start hiding animation
+      setTimeout(() => {
+        setCurrentNewsIndex((prevIndex) => (prevIndex + 1) % newsItems.length); // Move to the next news item
+        setIsVisible(true); // Show the next news item
+      }, isMobile ? 20000 : 1000); // Ensure hiding animation completes before showing the next news
+    }, isMobile ? 20000 : 4000); // Total duration for one news item (visible + hidden)
+    return () => clearInterval(interval); // Cleanup on component unmount
   }, [isMobile]);
 
   return (
@@ -48,15 +46,19 @@ const BreakingNews = () => {
       >
         <div className="flex items-center">
           {/* "Latest News" Box with Red Background */}
-          <div className="font-bold text-lg min-w-[120px] border-r bg-red-600 text-white p-2">
+          <div className="font-bold text-lg min-w-[130px]  bg-red-600 text-white p-2">
             Latest News
           </div>
 
-          <div className="overflow-hidden pl-4 relative w-full">
+          <div
+            className={`overflow-hidden pl-4 relative w-full ${
+              theme === "light" ? "bg-white" : "bg-gray-800"
+            }`}
+          >
             <p
-              className={`news-text  ${
+              className={`news-text ${
                 !isMobile && (isVisible ? "show-news" : "hide-news")
-              } text-lg  ${
+              } text-lg ${
                 theme === "light" ? "text-black" : "text-white"
               } whitespace-nowrap`}
             >

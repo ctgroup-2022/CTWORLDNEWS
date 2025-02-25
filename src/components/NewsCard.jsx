@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { FaDownload, FaEye, FaTag } from "react-icons/fa";
 import { toolbarPlugin } from "@react-pdf-viewer/toolbar";
 import "@react-pdf-viewer/toolbar/lib/styles/index.css";
-import '../App.css'; // Ensure your global styles are defined here
+import "../App.css"; // Ensure your global styles are defined here
 
 // Make sure PDF.js worker is set properly
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
@@ -60,10 +60,10 @@ const NewsCard = ({
   }, [theme]);
 
   return (
-    <div className="my-6 flex justify-center">
+    <div className="my-6 flex justify-center px-4 sm:px-6 md:px-0"> {/* ✅ Added padding on mobile screens */}
       {/* Card Container */}
       <div
-        className="rounded-lg shadow-2xl overflow-hidden bg-white max-w-sm w-full hover:shadow-2xl transition-transform transform hover:-translate-y-2 duration-300"
+        className="rounded-lg shadow-2xl overflow-hidden bg-white border border-white max-w-sm w-full hover:shadow-2xl transition-transform transform hover:-translate-y-2 duration-300 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
         onClick={toggleReadMore}
         style={{ backgroundColor: "var(--card-bg-color)", color: "var(--card-text-color)" }}
       >
@@ -115,7 +115,7 @@ const NewsCard = ({
                 e.stopPropagation(); // Prevent the click event on the main card container
                 toggleReadMore();
               }}
-              className="bg-[#155DA8] hover:bg-[#0E4A85] text-white font-medium px-4 py-2 rounded transition duration-200 flex items-center gap-2"
+              className="bg-[#155DA8] hover:bg-[#0E4A85] text-white font-medium px-4 py-2 rounded transition duration-200 flex items-center gap-2 max-sm:text-[12px]"
             >
               <FaEye /> View PDF
             </button>
@@ -123,7 +123,7 @@ const NewsCard = ({
             {/* Download Button */}
             <button
               onClick={handleDownload}
-              className="bg-[#155DA8] hover:bg-[#0E4A85] text-white font-medium px-4 py-2 rounded transition duration-200 flex items-center gap-2"
+              className="bg-[#155DA8] hover:bg-[#0E4A85] text-white font-medium px-4 py-2 rounded transition duration-200 flex items-center gap-2 max-sm:text-[12px]"
             >
               <FaDownload /> Download
             </button>
@@ -134,7 +134,7 @@ const NewsCard = ({
       {/* PDF Preview Modal */}
       {isReadMoreOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-2xl w-11/12 md:w-3/4 lg:w-1/2 h-[90%] p-4 relative overflow-hidden">
+          <div className="bg-white  dark:text-white rounded-lg shadow-2xl w-11/12 md:w-3/4 lg:w-1/2 h-[90%] p-4 relative overflow-hidden border border-white dark:border-gray-700">
             {/* Close Button */}
             <button
               onClick={toggleReadMore}
@@ -149,9 +149,8 @@ const NewsCard = ({
               <div className="w-full h-full overflow-auto">
                 <Worker workerUrl={pdfjs.GlobalWorkerOptions.workerSrc}>
                   <div className="mb-8">
-                
+                    <Toolbar />
                   </div>
-                  <Toolbar />
                   <Viewer
                     fileUrl={pdfSrc}
                     plugins={[toolbarPluginInstance]}

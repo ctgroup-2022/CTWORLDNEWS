@@ -22,19 +22,16 @@ const Navbar = ({ searchQuery, onSearch }) => {
 
   return (
     <nav
-      className={`fixed w-screen top-0 left-0 z-10 ${
-        theme === 'light' ? 'bg-white' : 'bg-gray-800'
-      } shadow-lg transition-all duration-300`}
+      className="fixed w-screen top-0 left-0 z-20 shadow-lg transition-all duration-300 bg-[#074F9D]"
     >
       <div className="container mx-auto flex justify-between items-center px-6 py-3">
         {/* Logo */}
         <img
-          src={theme === 'light' ? BlueLogo : Logo}
+          src={Logo}
           alt="CEETEEWORLD Logo"
           className="h-16 w-28"
         />
         
-
         {/* Search Bar for Larger Screens */}
         <div className="hidden md:flex items-center">
           <div

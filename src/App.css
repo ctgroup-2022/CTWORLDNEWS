@@ -1,35 +1,80 @@
-/* Floating effect for the character */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+/* Basic Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
 }
 
-.floating-character {
-  animation: float 3s ease-in-out infinite;
+.app {
+  padding: 20px;
 }
 
-/* Global CSS file or within a <style> tag */
-:root {
-  --scale-factor: 1;
+.feed-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 
-.marquee {
-    white-space: nowrap;
-    overflow: hidden;
-    display: flex;
-  }
-  .pagination .page-item .active {
-    border-radius: 50%;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
-    transform: scale(1.1);
-  }
-  .pagination .page-item:hover {
-    background: #2563eb;
-    color: #fff;
-    transform: translateY(-2px);
-  }
-  
+.news-feed {
+  padding: 20px;
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.news-item {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.category-tag {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #ff5b5b;
+  color: white;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.scholarships {
+  background-color: #4caf50;
+}
+
+.national-day {
+  background-color: #2196f3;
+}
+
+.academic-news {
+  background-color: #ff9800;
+}
+
+.news-title {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.news-description {
+  font-size: 1rem;
+  color: #555;
+}
+
+.read-more-link {
+  color: #2196f3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-more-link:hover {
+  text-decoration: underline;
+}
+
+.shadow-custom {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 15px rgba(0, 0, 0, 0.05);
+}

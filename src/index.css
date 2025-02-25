@@ -224,3 +224,46 @@ a:hover .particles::after {
   animation-duration: 2s;
   transform: scale(1.2); /* Makes particles more dynamic on hover */
 }
+
+@keyframes drawLine {
+  0% {
+    stroke-dasharray: 0 180;
+    stroke-dashoffset: 180;
+  }
+  100% {
+    stroke-dasharray: 180 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw {
+  stroke-dasharray: 180;
+  stroke-dashoffset: 180;
+  animation: drawLine 1.5s ease-in-out forwards;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dasharray: 0, 180;
+  }
+  100% {
+    stroke-dasharray: 180, 0;
+  }
+}
+
+.animate-draw {
+  animation: draw 2s ease-in-out infinite;
+}
+
+.transition-transform {
+  transition: transform 0.5s ease-in-out;
+}
+
+.translate-x-full {
+  transform: translateX(100%);
+}
+
+.translate-x-0 {
+  transform: translateX(0%);
+}
+
