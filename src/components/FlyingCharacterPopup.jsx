@@ -49,7 +49,7 @@ const FloatingCharacterPopup = () => {
             {/* Character with Balloon */}
             <div className="relative">
               <img
-                src="src/assets/Images/ballon.png" // Replace with a real image URL
+                src={Ballon} // Replace with a real image URL
                 alt="Floating Character"
                 className="h-32 w-auto sm:h-48 md:h-64" // Adjust the image size for different screen sizes
               />
