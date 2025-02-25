@@ -10,7 +10,7 @@ const SplitPage = ({ image, title, text, reverse }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
 
   return (
-    <div ref={ref} className={`flex flex-col md:flex-row h-auto min-h-screen items-center justify-center ${reverse ? 'md:flex-row-reverse' : ''} ${theme === 'light' ? 'bg-gray-50 text-gray-900' : 'bg-gray-800 text-white'} transition-all duration-700 ease-in-out p-4 sm:p-8 overflow-hidden`}>
+    <div ref={ref} className={`flex flex-col md:flex-row  h-full items-center justify-center ${reverse ? 'md:flex-row-reverse' : ''} ${theme === 'light' ? 'bg-gray-50 text-gray-900' : 'bg-gray-800 text-white'} transition-all duration-700 ease-in-out p-4 sm:p-8 overflow-hidden`}>
       {/* Image Section */}
       <div className="w-full md:w-1/2 flex justify-center items-center p-5">
         <motion.img
