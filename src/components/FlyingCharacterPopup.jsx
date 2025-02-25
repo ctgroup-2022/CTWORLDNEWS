@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-
+import Ballon from "../assets/Images/ballon.png"
 const FloatingCharacterPopup = () => {
   const [visible, setVisible] = useState(false); // Control visibility of the popup
 
