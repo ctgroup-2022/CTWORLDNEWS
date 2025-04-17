@@ -1,0 +1,271 @@
+
+/* Add any additional custom styles here */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .clip-path-slant {
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+}
+/* Particle Animation for Light Theme */
+@keyframes lightParticles {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-10px) translateX(-10px);
+    opacity: 0;
+  }
+}
+
+/* Particle Animation for Dark Theme */
+@keyframes darkParticles {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-20px) translateX(20px);
+    opacity: 0;
+  }
+}
+
+/* Styles for the particles behind buttons */
+button .particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none; /* To not interfere with button interactions */
+}
+
+/* Particle elements for light theme */
+button.light-theme .particles::before,
+button.light-theme .particles::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: lightParticles 3s linear infinite;
+}
+
+button.light-theme .particles::before {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+button.light-theme .particles::after {
+  top: 70%;
+  left: 80%;
+  animation-delay: 1.5s;
+}
+
+/* Particle elements for dark theme */
+button.dark-theme .particles::before,
+button.dark-theme .particles::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  animation: darkParticles 3s linear infinite;
+}
+
+button.dark-theme .particles::before {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+button.dark-theme .particles::after {
+  top: 70%;
+  left: 80%;
+  animation-delay: 1.5s;
+}
+
+/* Button Hover Animation */
+@keyframes buttonHoverAnimation {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+button.group:hover {
+  animation: buttonHoverAnimation 0.5s ease-in-out;
+}
+
+/* Gradient Animation for Background */
+@keyframes gradient-background {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-background {
+  animation: gradient-background 5s ease infinite;
+  background-size: 200% 200%;
+}
+
+/* General Particle Styles */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Particle Elements */
+.particles::before,
+.particles::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+/* Light Theme Particle Styles */
+.light-theme .particles::before {
+  background-color: white;
+  top: 10%;
+  left: 10%;
+  animation-name: lightParticles;
+}
+
+.light-theme .particles::after {
+  background-color: white;
+  top: 70%;
+  left: 80%;
+  animation-name: lightParticles;
+}
+
+/* Dark Theme Particle Styles */
+.dark-theme .particles::before {
+  background-color: rgba(255, 255, 255, 0.7);
+  top: 20%;
+  left: 20%;
+  animation-name: darkParticles;
+}
+
+.dark-theme .particles::after {
+  background-color: rgba(255, 255, 255, 0.7);
+  top: 70%;
+  left: 70%;
+  animation-name: darkParticles;
+}
+
+/* Particle Animations */
+@keyframes lightParticles {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-20px, -20px);
+    opacity: 0;
+  }
+}
+
+@keyframes darkParticles {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(20px, 20px);
+    opacity: 0;
+  }
+}
+
+/* Hover Enhancement (Optional) */
+a:hover .particles::before,
+a:hover .particles::after {
+  animation-duration: 2s;
+  transform: scale(1.2); /* Makes particles more dynamic on hover */
+}
+
+@keyframes drawLine {
+  0% {
+    stroke-dasharray: 0 180;
+    stroke-dashoffset: 180;
+  }
+  100% {
+    stroke-dasharray: 180 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw {
+  stroke-dasharray: 180;
+  stroke-dashoffset: 180;
+  animation: drawLine 1.5s ease-in-out forwards;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dasharray: 0, 180;
+  }
+  100% {
+    stroke-dasharray: 180, 0;
+  }
+}
+
+.animate-draw {
+  animation: draw 2s ease-in-out infinite;
+}
+
+.transition-transform {
+  transition: transform 0.5s ease-in-out;
+}
+
+.translate-x-full {
+  transform: translateX(100%);
+}
+
+.translate-x-0 {
+  transform: translateX(0%);
+}
+
