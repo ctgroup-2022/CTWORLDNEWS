@@ -24,7 +24,7 @@ function Home({ searchQuery }) {
   const cards = [
     {
       imageSrc: thumbnailImage,
-      title: "Breaking News: Global Tech Conference 2024",
+      // title: "Breaking News: Global Tech Conference 2024",
       description:
         "The Global Tech Conference 2024 is set to bring together world leaders in the tech industry for an exchange of ideas and innovations...",
       date: "Aug 20, 2024",
