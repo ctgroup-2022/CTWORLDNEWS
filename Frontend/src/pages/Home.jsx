@@ -33,7 +33,7 @@ function Home({ searchQuery }) {
         "",
       date: "January, 2026",
       pdfSrc: pdfFile,
-    ,
+   
       onDownloadFileName: "1.pdf",
     },
     {
