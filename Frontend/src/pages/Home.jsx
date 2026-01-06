@@ -48,16 +48,7 @@ function Home({ searchQuery }) {
      
       onDownloadFileName: "2.pdf",
     },
-     {
-      imageSrc: thumbnail1,
-      title: "",
-      description:
-        "",
-      date: "December, 2025",
-      pdfSrc: pdfFile1,
      
-      onDownloadFileName: "2.pdf",
-    },
     {
       imageSrc: thumbnail2,
       title: "",
