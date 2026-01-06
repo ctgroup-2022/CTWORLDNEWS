@@ -78,16 +78,16 @@ function Home({ searchQuery }) {
     
       onDownloadFileName: "4.pdf",
     },
-    {
-      imageSrc: thumbnail4,
-      title: "",
-      description:
-        "",
-      date: "July, 2024",
-      pdfSrc: pdfFile4,
+    // {
+    //   imageSrc: thumbnail4,
+    //   title: "",
+    //   description:
+    //     "",
+    //   date: "July, 2024",
+    //   pdfSrc: pdfFile4,
    
-      onDownloadFileName: "5.pdf",
-    },
+    //   onDownloadFileName: "5.pdf",
+    // },
 
 
   ];
