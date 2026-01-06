@@ -16,7 +16,7 @@ import thumbnailImage from "../assets/Images/2.png";
 import thumbnail1 from "../assets/Images/3.png";
 import thumbnail2 from "../assets/Images/4.png";
 import thumbnail3 from "../assets/Images/5.png";
-import thumbnail4 from "../assets/Images/6.png";
+
 import ReactPaginate from "react-paginate";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Importing icons for previous and next buttons
 import '../index.css';
@@ -28,6 +28,47 @@ function Home({ searchQuery }) {
   const { theme } = useTheme();
 
   const cards = [
+    {
+      imageSrc: thumbnailImage,
+      title: "",
+      description:
+        "",
+      date: "January, 2026",
+      pdfSrc: pdfFile,
+   
+      onDownloadFileName: "1.pdf",
+    },
+    {
+      imageSrc: thumbnail1,
+      title: "",
+      description:
+        "",
+      date: "December, 2025",
+      pdfSrc: pdfFile1,
+     
+      onDownloadFileName: "2.pdf",
+    },
+     
+    {
+      imageSrc: thumbnail2,
+      title: "",
+      description:
+        "",
+      date: "September, 2025",
+      pdfSrc: pdfFile2,
+     
+      onDownloadFileName: "3.pdf",
+    },
+    {
+      imageSrc: thumbnail3,
+      title: "",
+      description:
+        "",
+      date: "August, 2025",
+      pdfSrc: pdfFile3,
+    
+      onDownloadFileName: "4.pdf",
+    },
     {
       imageSrc: thumbnailImage,
       title: "",
