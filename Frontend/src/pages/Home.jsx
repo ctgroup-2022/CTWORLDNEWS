@@ -112,7 +112,7 @@ function Home({ searchQuery }) {
       description:
         "",
       date: "August, 2025",
-      pdfSrc: pdfFile3,
+      pdfSrc: pdfFile7,
     
       onDownloadFileName: "4.pdf",
     },
