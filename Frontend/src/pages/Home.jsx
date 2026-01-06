@@ -11,10 +11,12 @@ import pdfFile from "../assets/pdf/1.pdf";
 import pdfFile1 from "../assets/pdf/2.pdf";
 import pdfFile2 from "../assets/pdf/3.pdf";
 import pdfFile3 from "../assets/pdf/4.pdf";
+import pdfFile4 from "../assets/pdf/5.pdf";
 import thumbnailImage from "../assets/Images/2.png";
 import thumbnail1 from "../assets/Images/3.png";
 import thumbnail2 from "../assets/Images/4.png";
 import thumbnail3 from "../assets/Images/5.png";
+import thumbnail4 from "../assets/Images/6.png";
 import ReactPaginate from "react-paginate";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Importing icons for previous and next buttons
 import '../index.css';
@@ -67,14 +69,14 @@ function Home({ searchQuery }) {
       onDownloadFileName: "4.pdf",
     },
     {
-      imageSrc: thumbnailImage,
+      imageSrc: thumbnail4,
       title: "",
       description:
         "",
-      date: "Oct 15, 2024",
-      pdfSrc: pdfFile,
+      date: "July, 2024",
+      pdfSrc: pdfFile4,
    
-      onDownloadFileName: "cybersecurity-threats.pdf",
+      onDownloadFileName: "5.pdf",
     },
 
 
