@@ -21,8 +21,8 @@ import thumbnail2 from "../assets/Images/4.png";
 import thumbnail3 from "../assets/Images/5.png";
 import thumbnail4 from "../assets/Images/6.png";
 import thumbnail5 from "../assets/Images/7.png";
-import thumbnail6 from "../assets/Images/8.png";
-import thumbnail7 from "../assets/Images/9.png";
+import thumbnail6 from "../assets/Images/8.jpg";
+import thumbnail7 from "../assets/Images/9.jpg";
 import ReactPaginate from "react-paginate";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Importing icons for previous and next buttons
 import '../index.css';
@@ -83,7 +83,7 @@ function Home({ searchQuery }) {
       date: "January, 2026",
       pdfSrc: pdfFile4,
    
-      onDownloadFileName: "1.pdf",
+      onDownloadFileName: "5.pdf",
     },
     {
       imageSrc: thumbnail5,
@@ -93,7 +93,7 @@ function Home({ searchQuery }) {
       date: "December, 2025",
       pdfSrc: pdfFile5,
      
-      onDownloadFileName: "2.pdf",
+      onDownloadFileName: "6.pdf",
     },
      
     {
@@ -104,7 +104,7 @@ function Home({ searchQuery }) {
       date: "September, 2025",
       pdfSrc: pdfFile6,
      
-      onDownloadFileName: "3.pdf",
+      onDownloadFileName: "7.pdf",
     },
     {
       imageSrc: thumbnail7,
@@ -114,7 +114,7 @@ function Home({ searchQuery }) {
       date: "August, 2025",
       pdfSrc: pdfFile7,
     
-      onDownloadFileName: "4.pdf",
+      onDownloadFileName: "8.pdf",
     },
     // {
     //   imageSrc: thumbnail4,
