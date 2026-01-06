@@ -7,9 +7,10 @@ import SubNavLinks from "../components/Navbar/SubNavLinks";
 import BreakingNews from "../components/Navbar/BreakingNews";
 import { useTheme } from "../context/ThemeContext";
 import BannerImg from "../assets/Images/Banner.jpeg";
-import pdfFile from "../assets/pdf/pdf.pdf";
-import thumbnailImage from "../assets/Images/image.png";
-import thumbnail1 from "../assets/Images/thumb1.png";
+import pdfFile from "../assets/pdf/1.pdf";
+import pdfFile1 from "../assets/pdf/2.pdf";
+import thumbnailImage from "../assets/Images/1.png";
+import thumbnail1 from "../assets/Images/2.png";
 import thumbnail2 from "../assets/Images/thumb2.png";
 import ReactPaginate from "react-paginate";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Importing icons for previous and next buttons
@@ -27,20 +28,20 @@ function Home({ searchQuery }) {
       title: "",
       description:
         "",
-      date: "Aug 20, 2024",
+      date: "January, 2026",
       pdfSrc: pdfFile,
-      categories: ["Tech", "Business"],
-      onDownloadFileName: "tech-conference.pdf",
+    ,
+      onDownloadFileName: "1.pdf",
     },
     {
       imageSrc: thumbnail1,
-      title: "Economy Insights: Market Analysis for Q2",
+      title: "",
       description:
-        "An in-depth market analysis for Q2, highlighting economic trends, forecasts, and key takeaways for businesses and investors...",
-      date: "Sep 10, 2024",
-      pdfSrc: pdfFile,
-      categories: ["Tech", "Business"],
-      onDownloadFileName: "q2-economy.pdf",
+        "",
+      date: "December, 2025",
+      pdfSrc: pdfFile1,
+     
+      onDownloadFileName: "2.pdf",
     },
     {
       imageSrc: thumbnail2,
