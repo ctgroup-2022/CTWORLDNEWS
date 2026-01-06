@@ -12,11 +12,17 @@ import pdfFile1 from "../assets/pdf/2.pdf";
 import pdfFile2 from "../assets/pdf/3.pdf";
 import pdfFile3 from "../assets/pdf/4.pdf";
 import pdfFile4 from "../assets/pdf/5.pdf";
+import pdfFile5 from "../assets/pdf/6.pdf";
+import pdfFile6 from "../assets/pdf/7.pdf";
+import pdfFile7 from "../assets/pdf/8.pdf";
 import thumbnailImage from "../assets/Images/2.png";
 import thumbnail1 from "../assets/Images/3.png";
 import thumbnail2 from "../assets/Images/4.png";
 import thumbnail3 from "../assets/Images/5.png";
-
+import thumbnail4 from "../assets/Images/6.png";
+import thumbnail5 from "../assets/Images/7.png";
+import thumbnail6 from "../assets/Images/8.png";
+import thumbnail7 from "../assets/Images/9.png";
 import ReactPaginate from "react-paginate";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Importing icons for previous and next buttons
 import '../index.css';
@@ -70,38 +76,38 @@ function Home({ searchQuery }) {
       onDownloadFileName: "4.pdf",
     },
     {
-      imageSrc: thumbnailImage,
+      imageSrc: thumbnail4,
       title: "",
       description:
         "",
       date: "January, 2026",
-      pdfSrc: pdfFile,
+      pdfSrc: pdfFile4,
    
       onDownloadFileName: "1.pdf",
     },
     {
-      imageSrc: thumbnail1,
+      imageSrc: thumbnail5,
       title: "",
       description:
         "",
       date: "December, 2025",
-      pdfSrc: pdfFile1,
+      pdfSrc: pdfFile5,
      
       onDownloadFileName: "2.pdf",
     },
      
     {
-      imageSrc: thumbnail2,
+      imageSrc: thumbnail6,
       title: "",
       description:
         "",
       date: "September, 2025",
-      pdfSrc: pdfFile2,
+      pdfSrc: pdfFile6,
      
       onDownloadFileName: "3.pdf",
     },
     {
-      imageSrc: thumbnail3,
+      imageSrc: thumbnail7,
       title: "",
       description:
         "",
